@@ -29,9 +29,8 @@
   // Target the checkbox.
   input[type=checkbox]
   {
-    // Make the checkbox a little larger so it is easier to click.
-    height: 2em;
-    width: 2em;
+    // Remove default margins.
+    margin: 0;
 
     // Give the checkbox a custom checkmark color so that it better fits our
     // theme. We can reuse the background properties so that it merges into the
@@ -47,6 +46,9 @@
   // Target the title.
   .title
   {
+    // Use Flexbox to create a layout for this.
+    display: flex;
+
     // Target both the span that display the regular title and the input that
     // allows for editing the title. This allows us to keep them exactly in the
     // same place.
@@ -56,6 +58,9 @@
       border-width: 1px;
       border-style: solid;
       padding: 0.5em;
+
+      // Use as much space as we can get.
+      flex-grow: 1;
     }
 
     // Target the regular text.

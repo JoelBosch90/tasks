@@ -1,14 +1,66 @@
 /**
  *  Basic styling for the input elements.
  */
-input[type=text]
-{
-  // Make sure that we don't change the text size.
-  font-size: inherit;
-  font-family: inherit;
 
-  // Set borders and padding.
-  border-width: 1px;
-  border-style: solid;
-  padding: 0.5em;
+input{
+
+  // We want to control the accent colors here.
+  --accent-hue: 0;
+  --accent-saturation: 0%;
+  --accent-lightness: 50%;
+  --accent-opacity: 0.75;
+
+  // Give all inputs rounded corners for a friendlier look.
+  border-radius: 0.25em;
+
+  // Target text input specifically.
+  &[type=text]
+  {
+    // Make sure that we don't change the text size.
+    font-size: inherit;
+    font-family: inherit;
+  
+    // Set borders and padding.
+    padding: 0.5em;
+    border-width: 1px;
+    border-style: solid;
+    border-color: hsla(
+      var(--accent-hue),
+      var(--accent-saturation),
+      var(--accent-lightness),
+      var(--accent-opacity)
+    );
+
+    // Change the color of the outline. 
+    outline: none;
+
+    // Target input elements on hover.
+    &:hover, :focus-visible
+    {
+      // Give them a noticeably different border.
+      border-color: hsla(
+        var(--accent-hue),
+        var(--accent-saturation),
+        75%,
+        var(--accent-opacity)
+      );
+    }
+  }
+  
+  // Target checkboxes.
+  &[type=checkbox]
+  {
+    // Make the checkbox a little larger so it is easier to click.
+    height: 2em;
+    width: 2em;
+  
+    // Give the checkbox a custom checkmark color so that it better fits our
+    // theme.
+    accent-color: hsla(
+      var(--accent-hue),
+      var(--accent-saturation),
+      var(--accent-lightness),
+      var(--accent-opacity)
+    );
+  }
 }
