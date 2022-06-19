@@ -1,0 +1,14 @@
+/**
+ *  Basic styling for the input elements.
+ */
+input[type=text]
+{
+  // Make sure that we don't change the text size.
+  font-size: inherit;
+  font-family: inherit;
+
+  // Set borders and padding.
+  border-width: 1px;
+  border-style: solid;
+  padding: 0.5em;
+}

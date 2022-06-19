@@ -46,10 +46,15 @@ export default function NewTask({ createTask }) {
     <div className={styles['new-task']}>
       <input
         ref={inputRef}
+        type="text"
         placeholder={"New task title..."}
         onChange={inputChangeHandler}
+        onKeyDown={event => { if (event.key === 'Enter') addTask() }}
       />
-      <button onClick={addTask}>
+      <button
+        onClick={addTask}
+        className={'icon'}
+      >
         <FontAwesomeIcon icon={faPlus} />
       </button>
     </div>

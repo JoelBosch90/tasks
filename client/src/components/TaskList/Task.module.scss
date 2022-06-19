@@ -8,6 +8,9 @@
   display: grid;
   grid-template-columns: max-content auto max-content max-content;
 
+  // Vertically center all elements.
+  align-items: center;
+
   // Keep a little space between the different elements.
   gap: 1ch;
 
@@ -27,8 +30,8 @@
   input[type=checkbox]
   {
     // Make the checkbox a little larger so it is easier to click.
-    height: 1.5em;
-    width: 1.5em;
+    height: 2em;
+    width: 2em;
 
     // Give the checkbox a custom checkmark color so that it better fits our
     // theme. We can reuse the background properties so that it merges into the
@@ -39,21 +42,50 @@
       var(--bg-lightness),
       var(--bg-opacity)
     );
-
-    // Make sure that the checkbox is aligned vertically.
-    align-self: center;
   }
 
   // Target the title.
-  span
+  .title
   {
-    // Target the text input.
-    input[type=text]
+    // Target both the span that display the regular title and the input that
+    // allows for editing the title. This allows us to keep them exactly in the
+    // same place.
+    span, input
     {
-      // Make sure that we don't change the text size.
-      font-size: inherit;
-      font-family: inherit;
+      // Give them both equal borders and padding.
+      border-width: 1px;
+      border-style: solid;
+      padding: 0.5em;
     }
+
+    // Target the regular text.
+    span
+    {
+      // Don't show the regular text's borders.
+      border-color: transparent;
+
+      // Hide entirely when empty.
+      &:empty { display: none; }
+    }
+  }
+
+  // Target the buttons.
+  > button
+  {
+    // Install a background color that matches the task's background.
+    background-color: hsla(
+      var(--bg-hue),
+      var(--bg-saturation),
+      50%,
+      var(--bg-opacity)
+    );
+
+    // And a darker icon color.
+    color: hsl(
+      var(--bg-hue),
+      var(--bg-saturation),
+      10%
+    );
   }
 
   // Target the task when in editing mode.

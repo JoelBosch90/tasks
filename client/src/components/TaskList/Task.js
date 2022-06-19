@@ -31,15 +31,27 @@ export default function Task({ id, title, done, remove, update }) {
   useEffect(() => { inputRef.current.value = inputValue }, [inputValue])
 
   /**
-   *  Handler function for handling click events on the edit button. This will
-   *  toggle editing mode on and off, and submit any pending title changes when
-   *  the editing mode is toggled off.
+   *  Handler function for handling edit events. This will toggle editing mode
+   *  on and off, and submit any pending title changes when the editing mode is
+   *  toggled off.
    */
-  const editClickHandler = () => {
+  const editHandler = () => {
 
     // If we're not currently editing the task, we should simply go into editing
     // mode.
-    if (!editing) return setEditing(true)
+    if (!editing) {
+
+      // Enable editing mode.
+      setEditing(true)
+
+      // Set focus on the title input. To do this we need to make sure that it
+      // is visible first.
+      inputRef.current.classList.remove(styles.hidden)
+      inputRef.current.focus()
+
+      // Skip out.
+      return
+    }
 
     // Update the current title with the current input.
     update(id, { title: inputValue })
@@ -61,19 +73,28 @@ export default function Task({ id, title, done, remove, update }) {
         checked={done}
         onChange={checkHandler}
       />
-      <span>
-        { editing ? '' : title }
+      <span className={styles.title}>
+        <span>
+          { editing ? '' : title }
+        </span>
         <input
           ref={inputRef}
           type="text"
           className={editing ? '' : styles.hidden}
           onChange={inputChangeHandler}
+          onKeyDown={event => { if (event.key === 'Enter') editHandler() }}
         />
       </span>
-      <button onClick={editClickHandler}>
+      <button
+        onClick={editHandler}
+        className={'icon'}
+      >
         <FontAwesomeIcon icon={faPen} />
       </button>
-      <button onClick={() => void remove(id)}>
+      <button
+        onClick={() => void remove(id)}
+        className={'icon'}
+      >
         <FontAwesomeIcon icon={faTrash} />
       </button>
     </div>

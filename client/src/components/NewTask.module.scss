@@ -8,6 +8,9 @@
   display: grid;
   grid-template-columns: auto max-content;
 
+  // Keep some distance between the items.
+  gap: 1em;
+
   // Add a little bit of vertical space.
   margin: 1em 0;
 }

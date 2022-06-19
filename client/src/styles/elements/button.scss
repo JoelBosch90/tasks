@@ -1,0 +1,48 @@
+/**
+ *  Basic styling for the button elements.
+ */
+button
+{
+  // Remove the borders.
+  border: none;
+  
+  // Get rid of the default outline.
+  outline: none;
+
+  // Make sure that the buttons are square.
+  aspect-ratio: 1/1;
+
+  // Make sure we inherit the local text styling.
+  font-family: inherit;
+  font-size: inherit;
+
+  // Give the buttons a bit of padding to make the clickable area larger than
+  // the icons. This makes them easier to click.
+  padding: .75em;
+
+  // Give the buttons rounded corners for a friendlier look.
+  border-radius: .25em;
+
+  // Use a darker background color and lighter text.
+  color: hsl(0, 0%, 85%, 0.95);
+  background-color: hsl(0, 0%, 30%, 0.95);
+
+  // Make sure that it is clear that this is clickable.
+  cursor: pointer;
+
+  // Use an animation for hover and focus effects.
+  transition-duration: var(--animation-speed-quick);
+  transition-property: filter;
+
+  // Make the buttons lighter on hover and focus.
+  &:hover, &:focus { filter: brightness(125%); }
+
+  // Target buttons using an icon.
+  &.icon
+  {
+    // Center the icons.
+    display: flex;
+    align-items: center;
+    justify-items: center;
+  }
+}
