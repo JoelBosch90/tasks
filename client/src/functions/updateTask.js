@@ -14,8 +14,8 @@ const updateTask = (setTasks, id, update) => {
       // Don't change unrelated tasks.
       if (task.id !== id) return task
 
-      // Install the updated properties.
-      return { ...task, ...update}
+      // Install the updated properties, but never update the identifier.
+      return { ...task, ...update, id: task.id }
     })
   })
 }
