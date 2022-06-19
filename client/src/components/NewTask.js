@@ -30,6 +30,9 @@ export default function NewTask({ createTask }) {
    */
   const addTask = () => {
 
+    // Make sure that we do have some input value.
+    if (!inputValue) return
+
     // First create the new task using the current input as the title.
     createTask(inputValue)
 

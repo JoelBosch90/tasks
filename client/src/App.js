@@ -22,7 +22,7 @@ import styles from './App.module.scss'
 export default function App() {
 
   // We keep track of all tasks in a single array.
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([{ id: 1, title: 'placeholder', done: false }])
 
   return (
     <div className={styles.app}>

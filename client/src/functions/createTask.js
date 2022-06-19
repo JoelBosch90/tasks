@@ -14,7 +14,7 @@ const createTask = (setTasks, title) => {
     return [ ...tasks, {
       title,
       id: lastId + 1,
-      checked: false,
+      done: false,
     }]
   })
 }

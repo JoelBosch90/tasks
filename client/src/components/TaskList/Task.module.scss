@@ -8,11 +8,80 @@
   display: grid;
   grid-template-columns: max-content auto max-content max-content;
 
+  // Keep a little space between the different elements.
+  gap: 1ch;
+
+  // Add some padding to give each task some body.
+  padding: .5em 1em;
+
+  // Set the parameters for the default background color.
+  --bg-hue: 0;
+  --bg-saturation: 0%;
+  --bg-lightness: 75%;
+  --bg-opacity: 0.25;
+
+  // Give each task rounded edges for a friendlier look.
+  border-radius: .25em;
+
+  // Target the checkbox.
+  input[type=checkbox]
+  {
+    // Make the checkbox a little larger so it is easier to click.
+    height: 1.5em;
+    width: 1.5em;
+
+    // Give the checkbox a custom checkmark color so that it better fits our
+    // theme. We can reuse the background properties so that it merges into the
+    // background when checked.
+    accent-color: hsla(
+      var(--bg-hue),
+      var(--bg-saturation),
+      var(--bg-lightness),
+      var(--bg-opacity)
+    );
+
+    // Make sure that the checkbox is aligned vertically.
+    align-self: center;
+  }
+
+  // Target the title.
+  span
+  {
+    // Target the text input.
+    input[type=text]
+    {
+      // Make sure that we don't change the text size.
+      font-size: inherit;
+      font-family: inherit;
+    }
+  }
+
   // Target the task when in editing mode.
   &.editing
   {
-    background-color: gray;
+    // Make the task darker while editing.
+    --bg-lightness: 25%;
   }
+
+  // Target the task when marked as done.
+  &.done
+  {
+    // Make the task darker and much more transparent so that it does not draw
+    // as much attention.
+    --bg-lightness: 10%;
+    filter: opacity(50%);
+
+    // Show the text as strikken through.
+    text-decoration: line-through;
+  }
+
+  // Install the background color.
+  background-color: hsla(
+    var(--bg-hue),
+    var(--bg-saturation),
+    var(--bg-lightness),
+    var(--bg-opacity)
+  );
 }
 
 // Add a class to hide elements.

@@ -15,13 +15,16 @@ import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
  */
 export default function Task({ id, title, done, remove, update }) {
 
-  // A task can be in a state in which the user can edit the current title, or
-  // in a state in which the current title is only shown.
-  const [editing, setEditing] = useState(false)
+  // Get references for the input elements.
+  const checkRef = useRef()
+  const inputRef = useRef()
 
   // Use the original title as the default value for the edit input.
   const [inputValue, setInputValue] = useState(title)
-  const inputRef = useRef()
+
+  // A task can be in a state in which the user can edit the current title, or
+  // in a state in which the current title is only shown.
+  const [editing, setEditing] = useState(false)
 
   // Make sure that the input field keeps in sync with the input state.
   const inputChangeHandler = event => void setInputValue(event.target.value)
@@ -48,11 +51,12 @@ export default function Task({ id, title, done, remove, update }) {
   /**
    *  Handler function for handling change events for the checked input.
    */
-  const checkHandler = event => update(id, { checked: event.target.checked })
+  const checkHandler = event => update(id, { done: event.target.checked })
 
   return (
-    <div className={`${styles.task} ${editing ? styles.editing : ''}`}>
+    <div className={`${styles.task} ${editing ? styles.editing : ''} ${ done ? styles.done : ''}`}>
       <input
+        ref={checkRef}
         type="checkbox"
         checked={done}
         onChange={checkHandler}
@@ -61,6 +65,7 @@ export default function Task({ id, title, done, remove, update }) {
         { editing ? '' : title }
         <input
           ref={inputRef}
+          type="text"
           className={editing ? '' : styles.hidden}
           onChange={inputChangeHandler}
         />
