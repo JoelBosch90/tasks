@@ -11,11 +11,25 @@ import styles from './TaskList.module.scss'
  *  @param    {Object}  props   React props passed by the parent element.
  *  @returns  {JSX.Element}
  */
-export default function TaskList(props) {
+export default function TaskList({ tasks = [], update, remove }) {
+  
+  // Create a list of tasks.
+  const elements = tasks.map(task => {
+    return (
+      <Task
+        key={task.id}
+        title={task.title}
+        id={task.id}
+        done={task.done}
+        update={update}
+        remove={remove}
+      />
+    )
+  })
 
   return (
     <div className={styles['task-list']}>
-      <Task />
+      { elements }
     </div>
   )
 }

@@ -6,5 +6,14 @@
 {
   // Create a basic layout that allows maximum room for the title of the task.
   display: grid;
-  grid-template-columns: max-content auto max-content;
+  grid-template-columns: max-content auto max-content max-content;
+
+  // Target the task when in editing mode.
+  &.editing
+  {
+    background-color: gray;
+  }
 }
+
+// Add a class to hide elements.
+.hidden { display: none; }
