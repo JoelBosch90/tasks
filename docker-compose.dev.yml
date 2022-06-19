@@ -55,7 +55,7 @@ services:
       - PORT=8000
 
       # Tell React what port to connect to for hot reloading.
-      - WDS_SOCKET_PORT=8007
+      - WDS_SOCKET_PORT=8008
 
     # We can expose the client service in the container network.
     expose:

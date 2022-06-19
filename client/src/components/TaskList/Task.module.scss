@@ -1,0 +1,10 @@
+/**
+ *  Styling for the Task component that shows a single task.
+ */
+
+.task
+{
+  // Create a basic layout that allows maximum room for the title of the task.
+  display: grid;
+  grid-template-columns: max-content auto max-content;
+}

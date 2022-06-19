@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+// Import components.
+import NewTask from './components/NewTask'
+import TaskList from './components/TaskList'
 
-function App() {
+// Import styles.
+import styles from './App.module.scss'
+
+/**
+ *  Functional component that houses the entire tasks app. It show an element to
+ *  add new tasks and lists the tasks that were added before.
+ * 
+ *  @returns  {JSX.Element}
+ */
+export default function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.app}>
+      <main className={styles.content}>
+        <h1>Tasks</h1>
+        <NewTask />
+        <TaskList />
+      </main>
     </div>
-  );
+  )
 }
-
-export default App;

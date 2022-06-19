@@ -1,0 +1,13 @@
+/**
+ *  Styling for the NewTask component that allows users to create a new task.
+ */
+
+.new-task
+{
+  // Create a basic layout that allows maximum room for the input field.
+  display: grid;
+  grid-template-columns: auto max-content;
+
+  // Add a little bit of vertical space.
+  margin: 1em 0;
+}

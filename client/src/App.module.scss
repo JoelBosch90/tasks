@@ -1,0 +1,28 @@
+/**
+ *  Styling for the main Tasks app.
+ */
+
+.app
+{
+  // Take all the space we can get.
+  width: 100%;
+
+  // Use a single column layout.
+  display: flex;
+  flex-direction: column;
+
+  // Horizontally center the main content.
+  align-items: center;
+
+  .content
+  {
+    // Use all space we can get on smaller screens, but limit the width on
+    // larger screens based on text size. This helps our users by limiting the
+    // width of lines to read.
+    width: 100%;
+    max-width: 40em;
+
+    // Make sure that our app's content doesn't touch the edges of the screen.
+    padding: 2em;
+  }
+}

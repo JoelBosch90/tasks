@@ -1,0 +1,13 @@
+/**
+ *  Styling for the TaskList component that lists all tasks.
+ */
+
+.task-list
+{
+  // Create a single column layout
+  display: flex;
+  flex-direction: column;
+
+  // Create some space between tasks.
+  gap: 1em;
+}
