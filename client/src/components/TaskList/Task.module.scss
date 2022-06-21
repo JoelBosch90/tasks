@@ -60,6 +60,10 @@
   // Give each task rounded edges for a friendlier look.
   border-radius: .25em;
 
+  // List which properties to animate.
+  transition-duration: var(--animation-speed-slow);
+  transition-property: filter, text-decoration, background-color;
+
   // Target the title.
   .title
   {
