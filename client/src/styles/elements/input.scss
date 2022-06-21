@@ -34,6 +34,10 @@ input{
     // Change the color of the outline. 
     outline: none;
 
+    // Use an animation for the hover and focus effects.
+    transition-duration: var(--animation-speed-quick);
+    transition-property: border-color;
+
     // Target input elements on hover.
     &:hover, :focus-visible
     {

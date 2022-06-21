@@ -2,12 +2,34 @@
  *  Styling for the TaskList component that lists all tasks.
  */
 
+// We animate new tasks to slide in from the top. We use this line as a sort of
+// entrypoint so that the tasks have a logical origin point.
+hr
+{
+  // We want to make this a single thin line.
+  height: 1px;
+  margin: 0;
+
+  // We need some very subtle colors to create the gradient.
+  --edge: hsla(0, 0%, 75%, 25%);
+  --center: hsla(0, 0%, 50%, 25%);
+
+  // We want to use a background instead of a border so that we can use
+  // gradients to style this line.
+  border: 0;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--edge) 10%,
+    var(--center) 50%,
+    var(--edge) 90%,
+    transparent 100%
+  );
+}
+
 .task-list
 {
-  // Create a single column layout
+  // Create a single column layout.
   display: flex;
-  flex-direction: column;
-
-  // Create some space between tasks.
-  gap: 1em;
+  flex-direction: column-reverse;
 }

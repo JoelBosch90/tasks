@@ -28,8 +28,11 @@ export default function TaskList({ tasks = [], update, remove }) {
   })
 
   return (
-    <div className={styles['task-list']}>
-      { elements }
-    </div>
+    <>
+      <hr/>
+      <div className={styles['task-list']}>
+        { elements }
+      </div>
+    </>
   )
 }

@@ -66,37 +66,39 @@ export default function Task({ id, title, done, remove, update }) {
   const checkHandler = event => update(id, { done: event.target.checked })
 
   return (
-    <div className={`${styles.task} ${editing ? styles.editing : ''} ${ done ? styles.done : ''}`}>
-      <input
-        ref={checkRef}
-        type="checkbox"
-        checked={done}
-        onChange={checkHandler}
-      />
-      <span className={styles.title}>
-        <span>
-          { editing ? '' : title }
-        </span>
+    <div className={`${styles.wrapper} ${true ? styles['appear'] : ''}`}>
+      <div className={`${styles.task} ${editing ? styles.editing : ''} ${ done ? styles.done : ''}`}>
         <input
-          ref={inputRef}
-          type="text"
-          className={editing ? '' : styles.hidden}
-          onChange={inputChangeHandler}
-          onKeyDown={event => { if (event.key === 'Enter') editHandler() }}
+          ref={checkRef}
+          type="checkbox"
+          checked={done}
+          onChange={checkHandler}
         />
-      </span>
-      <button
-        onClick={editHandler}
-        className={'icon'}
-      >
-        <FontAwesomeIcon icon={faPen} />
-      </button>
-      <button
-        onClick={() => void remove(id)}
-        className={'icon'}
-      >
-        <FontAwesomeIcon icon={faTrash} />
-      </button>
+        <span className={styles.title}>
+          <span>
+            { editing ? '' : title }
+          </span>
+          <input
+            ref={inputRef}
+            type="text"
+            className={editing ? '' : styles.hidden}
+            onChange={inputChangeHandler}
+            onKeyDown={event => { if (event.key === 'Enter') editHandler() }}
+          />
+        </span>
+        <button
+          onClick={editHandler}
+          className={'icon'}
+        >
+          <FontAwesomeIcon icon={faPen} />
+        </button>
+        <button
+          onClick={() => void remove(id)}
+          className={'icon'}
+        >
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+      </div>
     </div>
   )
 }
