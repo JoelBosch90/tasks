@@ -2,6 +2,8 @@
 This is a basic task list written in React. Currently, it only stores the tasks
 in JavaScript memory, so you'll lose still your tasks on every page refresh.
 
+# Demo
+You can view a live version of this app [here](https://tasks.joelbosch.nl/).
 
 # How to run
 Included with the project is a bash script that can provide a handful of useful
