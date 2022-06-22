@@ -2,40 +2,6 @@
  *  Styling for the Task component that shows a single task.
  */
 
-// Animate new tasks.
-@keyframes appear
-{
-  from {
-    padding-top: 0;
-    max-height: 0;
-  }
-  to   {
-    padding-top: 1em;
-    max-height: 10em;
-  }
-}
-
-.wrapper
-{
-  // Use Flexbox to anchor the task to the bottom of the wrapper. This will
-  // allow the animation to make it look like the task slides in from the top.
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-
-  // Add some padding to keep some distance with the other tasks.
-  padding-top: 1em;
-
-  // Make sure to include the padding in the size calculations.
-  box-sizing: border-box;
-
-  // Make sure none of the task can escape this wrapper.
-  overflow: hidden;
-
-  // Add an animation when the task is added to the DOM.
-  &.appear { animation: appear var(--animation-speed-slow) ease-in; }
-}
-
 .task
 {
   // Create a basic layout that allows maximum room for the title of the task.

@@ -27,9 +27,69 @@ hr
   );
 }
 
-.task-list
+ul.list
 {
   // Create a single column layout.
   display: flex;
   flex-direction: column-reverse;
+
+  // We don't need padding or margin here.
+  margin: 0;
+  padding: 0;
+
+  --wrapper-padding-top: 1em;
+  --wrapper-max-height: 10em;
+
+  .wrapper
+  {
+    // Use Flexbox to anchor the task to the bottom of the wrapper. This will
+    // allow the animation to make it look like the task slides in from the top.
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  
+    // Add some padding to keep some distance with the other tasks.
+    padding-top: var(--wrapper-padding-top);
+    max-height: var(--wrapper-max-height);
+  
+    // Make sure to include the padding in the size calculations.
+    box-sizing: border-box;
+  
+    // Make sure none of the task can escape this wrapper.
+    overflow: hidden;
+  }
+  
+  // Add the same transitions for enter and exit animations.
+  .animation-enter-active, .animation-exit-active
+  {
+    // We want to animate the vertical heights of the wrapper. Because the task is
+    // anchor to the bottom of the wrapper, this makes it look like the task
+    // slides in from above.
+    transition-duration: var(--animation-speed-slow);
+    transition-property: padding-top, max-height;
+  }
+  
+  // Select the start and end states of the entering animation.
+  .animation-enter
+  {
+    padding-top: 0;
+    max-height: 0;
+  }
+  .animation-enter-active
+  {
+    padding-top: var(--wrapper-padding-top);
+    max-height: var(--wrapper-max-height);
+  }
+  
+  // Select the start and end states of the exiting animation.
+  .animation-exit
+  { 
+    padding-top: var(--wrapper-padding-top);
+    max-height: var(--wrapper-max-height);
+  }
+  .animation-exit-active
+  {
+    padding-top: 0;
+    max-height: 0;
+  } 
 }

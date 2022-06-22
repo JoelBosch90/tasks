@@ -1,3 +1,7 @@
+// Import React dependencies.
+import { createRef } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 // Import components.
 import Task from './TaskList/Task'
 
@@ -12,27 +16,47 @@ import styles from './TaskList.module.scss'
  *  @returns  {JSX.Element}
  */
 export default function TaskList({ tasks = [], update, remove }) {
-  
+
   // Create a list of tasks.
-  const elements = tasks.map(task => {
+  const taskElements = tasks.map(task => {
+    const taskRef = createRef(null);
     return (
-      <Task
+      <CSSTransition
+        nodeRef={taskRef}
         key={task.id}
-        title={task.title}
-        id={task.id}
-        done={task.done}
-        update={update}
-        remove={remove}
-      />
+        timeout={1000}
+        classNames={{
+          enter: styles['animation-enter'],
+          enterActive: styles['animation-enter-active'],
+          exit: styles['animation-exit'],
+          exitActive: styles['animation-exit-active'],
+        }}
+      >
+        <div
+          ref={taskRef}
+          className={styles.wrapper}
+        >
+          <Task
+            title={task.title}
+            id={task.id}
+            done={task.done}
+            update={update}
+            remove={remove}
+          />
+        </div>
+      </CSSTransition>
     )
   })
 
   return (
     <>
       <hr/>
-      <div className={styles['task-list']}>
-        { elements }
-      </div>
+      <TransitionGroup
+        component="ul"
+        className={styles.list}
+      >
+        { taskElements }
+      </TransitionGroup>
     </>
   )
 }
