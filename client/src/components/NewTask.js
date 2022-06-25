@@ -30,11 +30,12 @@ export default function NewTask({ createTask }) {
    */
   const addTask = () => {
 
-    // Make sure that we do have some input value.
-    if (!inputValue) return
+    // Let's ignore leading an trailing spaces.
+    const trimmedValue = inputValue.trim()
 
-    // First create the new task using the current input as the title.
-    createTask(inputValue)
+    // Create the new task using the current input as the title only if we have
+    // more than an empty string.
+    if (trimmedValue) createTask(trimmedValue)
 
     // Next, reset the input field and refocus it so that the user can
     // immediately create a new task.

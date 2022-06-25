@@ -1,11 +1,10 @@
-// Import React functionality.
-import { useState } from 'react';
 
 // Import components.
 import NewTask from './components/NewTask'
 import TaskList from './components/TaskList'
 
 // Import functions.
+import useLocalState from './functions/useLocalState'
 import createTask from './functions/createTask'
 import updateTask from './functions/updateTask'
 import removeTask from './functions/removeTask'
@@ -22,7 +21,7 @@ import styles from './App.module.scss'
 export default function App() {
 
   // We keep track of all tasks in a single array.
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useLocalState('tasks', [])
 
   return (
     <div className={styles.app}>

@@ -1,6 +1,6 @@
 /**
  *  A function that mocks a useState setter function for testing purposes.
- *  
+
  *  @returns  {Function}
  */
 const getMockStateSetter = (state = '') => {
