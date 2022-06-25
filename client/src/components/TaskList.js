@@ -3,7 +3,7 @@ import { createRef } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 // Import functions.
-import immutableSort from '../functions/immutableSort'
+import immutableSort from '../scripts/functions/immutableSort'
 
 // Import components.
 import Task from './TaskList/Task'

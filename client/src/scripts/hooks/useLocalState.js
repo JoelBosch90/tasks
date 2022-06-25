@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 // Import functions.
-import getLocalProp from '../getLocalProp'
-import setLocalProp from '../setLocalProp'
+import getLocalProp from '../functions/getLocalProp'
+import setLocalProp from '../functions/setLocalProp'
 
 /**
  *  Custom hook that acts juse like the useState hook, except it stores all

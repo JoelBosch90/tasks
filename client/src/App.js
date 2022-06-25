@@ -4,10 +4,10 @@ import NewTask from './components/NewTask'
 import TaskList from './components/TaskList'
 
 // Import functions.
-import useLocalState from './functions/hooks/useLocalState'
-import createTask from './functions/createTask'
-import updateTask from './functions/updateTask'
-import removeTask from './functions/removeTask'
+import useLocalState from './scripts/hooks/useLocalState'
+import createTask from './scripts/functions/tasks/createTask'
+import updateTask from './scripts/functions/tasks/updateTask'
+import removeTask from './scripts/functions/tasks/removeTask'
 
 // Import styles.
 import styles from './App.module.scss'
