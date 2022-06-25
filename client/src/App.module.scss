@@ -24,5 +24,8 @@
 
     // Make sure that our app's content doesn't touch the edges of the screen.
     padding: 2em;
+
+    // Make sure that we include the padding in the width of our content.
+    box-sizing: border-box;
   }
 }
