@@ -4,6 +4,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 // Import functions.
 import immutableSort from '../scripts/functions/immutableSort'
+import sortByCompleted from '../scripts/functions/tasks/sortByCompleted'
 
 // Import components.
 import Task from './TaskList/Task'
@@ -19,21 +20,6 @@ import styles from './TaskList.module.scss'
  *  @returns  {JSX.Element}
  */
 export default function TaskList({ tasks = [], update, remove }) {
-
-  /**
-   *  Function to sort the tasks by their completed status.
-   * 
-   *  @param  {Object}  taskA
-   *    @property {Boolean}   done  Whether the task is done or not.
-   *  @param  {Object}  taskB
-   *    @property {Boolean}   done  Whether the task is done or not.
-   *  @return {Number}
-   */
-  const sortByCompleted = (taskA, taskB) => {
-    if (taskA.done && !taskB.done) return -1
-    if (!taskA.done && taskB.done) return 1
-    return 0
-  }
 
   // Create a list of tasks.
   const taskElements = immutableSort(tasks, sortByCompleted).map(task => {
