@@ -1,5 +1,5 @@
 // Import the function to test.
-import getMockStateSetter from './getMockStateSetter';
+import getMockStateSetter from './getMockStateSetter'
 
 describe("The mock state setter function", () => {
   it("should return a function.", () => {

@@ -19,7 +19,7 @@ const getLocalProp = (name) => {
   if (memoizedStorage.hasOwnProperty(name)) return safeParse(memoizedStorage[name])
 
   // Try to get the prop from the local storage second.
-  if (window.localStorage.hasOwnProperty(name)) return safeParse(window.localStorage.getItem(name))
+  if (window.localStorage.getItem(name) !== null) return safeParse(window.localStorage.getItem(name))
 
   // Default to undefined.
   return undefined

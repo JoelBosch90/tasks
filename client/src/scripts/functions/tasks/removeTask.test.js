@@ -2,9 +2,9 @@
 import removeTask from './removeTask';
 
 // Get necessary mocking functions.
-import getMockStateSetter from '../getMockStateSetter';
+import getMockStateSetter from '../mock/getMockStateSetter';
 
-describe("The remove task function.", () => {
+describe("The remove task function", () => {
   it("should be able to remove the last task.", () => {
     const setTask = getMockStateSetter([{ id: 1, title: 'title1' }])
     removeTask(setTask, 1)

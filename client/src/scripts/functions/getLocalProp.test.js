@@ -1,7 +1,11 @@
 // Import the function to test.
-import getLocalProp from './getLocalProp';
+import getLocalProp from './getLocalProp'
 
-describe("The set local prop function.", () => {
+// Mock the local storage.
+import mockLocalStorage from '../functions/mock/mockLocalStorage'
+Object.defineProperty(window, 'localStorage', { value: new mockLocalStorage() })
+
+describe("The set local prop function", () => {
   it("should be able to get a false boolean.", () => {
     const value = false
     const name = 'test'

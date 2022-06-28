@@ -1,7 +1,7 @@
 // Import the function to test.
 import safeParse from './safeParse';
 
-describe("The safe parse function.", () => {
+describe("The safe parse function", () => {
   it("should be able to JSON parse a false boolean.", () => {
     const original = false
     const json = JSON.stringify(original)

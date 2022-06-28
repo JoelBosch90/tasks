@@ -1,7 +1,7 @@
 // Import the function to test.
 import immutableSort from './immutableSort';
 
-describe("The immutable sort function.", () => {
+describe("The immutable sort function", () => {
   it("should return a sorted list.", () => {
     const array = ['b', 'c', 'a', 'e', 'd', 'y']
     const sorted = immutableSort(array)
