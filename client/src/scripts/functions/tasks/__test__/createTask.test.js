@@ -1,8 +1,8 @@
 // Import the function to test.
-import createTask from './createTask';
+import createTask from '../createTask';
 
 // Get necessary mocking functions.
-import getMockStateSetter from '../mock/getMockStateSetter';
+import getMockStateSetter from '../../mock/getMockStateSetter';
 
 describe("The create task function", () => {
   it("should be able to add an initial first task.", () => {

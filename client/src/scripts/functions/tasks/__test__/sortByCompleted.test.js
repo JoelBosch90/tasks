@@ -1,5 +1,5 @@
 // Import the function to test.
-import sortByCompleted from './sortByCompleted';
+import sortByCompleted from '../sortByCompleted';
 
 describe("The sort by completed function", () => {
   it("should be able to sort a list of task objects by their completed property.", () => {

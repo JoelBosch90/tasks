@@ -9,7 +9,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 /**
  *  Functional component that displays a element that can be used to create a
  *  new task.
- * 
  *  @param    {Object}  props   React props passed by the parent element.
  *  @returns  {JSX.Element}
  */

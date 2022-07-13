@@ -1,8 +1,8 @@
 // Import the function to test.
-import removeTask from './removeTask';
+import removeTask from '../removeTask';
 
 // Get necessary mocking functions.
-import getMockStateSetter from '../mock/getMockStateSetter';
+import getMockStateSetter from '../../mock/getMockStateSetter';
 
 describe("The remove task function", () => {
   it("should be able to remove the last task.", () => {

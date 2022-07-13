@@ -1,8 +1,8 @@
 // Import the function to test.
-import updateTask from './updateTask';
+import updateTask from '../updateTask';
 
 // Get necessary mocking functions.
-import getMockStateSetter from '../mock/getMockStateSetter';
+import getMockStateSetter from '../../mock/getMockStateSetter';
 
 describe("The remove task function", () => {
   it("should be able to update a task's title when there is only one.", () => {

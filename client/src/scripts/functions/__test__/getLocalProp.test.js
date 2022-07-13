@@ -1,8 +1,8 @@
 // Import the function to test.
-import getLocalProp from './getLocalProp'
+import getLocalProp from '../getLocalProp'
 
 // Mock the local storage.
-import mockLocalStorage from '../functions/mock/mockLocalStorage'
+import mockLocalStorage from '../mock/mockLocalStorage'
 Object.defineProperty(window, 'localStorage', { value: new mockLocalStorage() })
 
 describe("The set local prop function", () => {

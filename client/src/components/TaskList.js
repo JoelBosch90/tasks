@@ -1,6 +1,6 @@
 // Import React dependencies.
-import { createRef } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { createRef } from 'react'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 // Import functions.
 import immutableSort from '../scripts/functions/immutableSort'
@@ -15,7 +15,6 @@ import styles from './TaskList.module.scss'
 /**
  *  Functional component that displays a element that can be used to list all
  *  tasks.
- * 
  *  @param    {Object}  props   React props passed by the parent element.
  *  @returns  {JSX.Element}
  */

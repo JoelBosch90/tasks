@@ -1,5 +1,5 @@
 // Import the function to test.
-import immutableSort from './immutableSort';
+import immutableSort from '../immutableSort';
 
 describe("The immutable sort function", () => {
   it("should return a sorted list.", () => {

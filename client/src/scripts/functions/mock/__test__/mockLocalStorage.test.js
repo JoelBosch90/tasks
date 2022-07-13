@@ -1,5 +1,5 @@
 // Import the function to test.
-import mockLocalStorage from './mockLocalStorage'
+import mockLocalStorage from '../mockLocalStorage'
 
 describe("The mock local storage class", () => {
   it("be able to set and get multiple items.", () => {

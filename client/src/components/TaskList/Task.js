@@ -9,7 +9,6 @@ import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
 /**
  *  Functional component that displays a element that can be used to show a
  *  single task.
- * 
  *  @param    {Object}  props   React props passed by the parent element.
  *  @returns  {JSX.Element}
  */
@@ -72,6 +71,7 @@ export default function Task({ id, title, done, remove, update }) {
         type="checkbox"
         checked={done}
         onChange={checkHandler}
+        aria-label={'Task completed'}
       />
       <span className={styles.title}>
         <span>
@@ -82,18 +82,21 @@ export default function Task({ id, title, done, remove, update }) {
           type="text"
           className={editing ? '' : styles.hidden}
           onChange={inputChangeHandler}
+          aria-label={'Edit title'}
           onKeyDown={event => { if (event.key === 'Enter') editHandler() }}
         />
       </span>
       <button
         onClick={editHandler}
         className={'icon'}
+        aria-label={editing ? 'Save' : 'Edit'}
       >
         <FontAwesomeIcon icon={faPen} />
       </button>
       <button
         onClick={() => void remove(id)}
         className={'icon'}
+        aria-label={'Remove'}
       >
         <FontAwesomeIcon icon={faTrash} />
       </button>

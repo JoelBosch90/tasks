@@ -1,3 +1,4 @@
+// Import React dependencies.
 import { useState } from 'react'
 
 // Import functions.
@@ -14,12 +15,14 @@ import setLocalProp from '../functions/setLocalProp'
  */
 export default function useLocalState(name, defaultValue) {
 
-  // Get the initial value from local storage if we can. Otherwise we can use
-  // the given default.
-  const initial = getLocalProp(name) || defaultValue
+  // If this state does not yet exist in localStorage, store the default value.
+  if (getLocalProp(name) === undefined) setLocalProp(name, defaultValue)
 
   // First use the React hook to get the state variable and setter function.
-  const [state, setState] = useState(initial)
+  // We use the useState hook because we need it to trigger rerenders when the
+  // state is updated.
+  // @todo: is there a more efficient way to do this?
+  const [state, setState] = useState(getLocalProp(name))
 
   // Use our saveLocalState function to make sure we always save state locally.
   return [state, update => {
