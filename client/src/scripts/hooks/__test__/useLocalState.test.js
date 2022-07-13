@@ -52,6 +52,7 @@ describe("The use local state hook", () => {
     // Test that the default value is used in the component render.
     expect(getByTestId(COMPONENTID)).toHaveTextContent(defaultValue)
   })
+
   it("should save a the default value in localStorage.", () => {
 
     // Make sure that we start with a clear local storage.
@@ -69,6 +70,7 @@ describe("The use local state hook", () => {
     expect(window.localStorage.hasOwnProperty(name)).toEqual(true)
     expect(window.localStorage.getItem(name)).toEqual(JSON.stringify(defaultValue))
   })
+
   it("should save a new value to localStorage by passing that value.", () => {
 
     // Make sure that we start with a clear local storage.
@@ -86,6 +88,7 @@ describe("The use local state hook", () => {
     expect(window.localStorage.hasOwnProperty(name)).toEqual(true)
     expect(window.localStorage.getItem(name)).toEqual(JSON.stringify(newValue))
   })
+
   it("should save a new value to localStorage by passing a callback.", () => {
 
     // Make sure that we start with a clear local storage.
@@ -123,6 +126,7 @@ describe("The use local state hook", () => {
     expect(window.localStorage.hasOwnProperty(name)).toEqual(true)
     expect(window.localStorage.getItem(name)).toEqual(JSON.stringify(newValue))
   })
+  
   it("should pull from localStorage.", () => {
 
     // Make sure that we start with a clear local storage.

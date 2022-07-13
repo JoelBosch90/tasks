@@ -49,4 +49,12 @@ describe("The create task function", () => {
     createTask(setTask, `${title}2`)
     setTask(tasks => expect(tasks[1].id).toBe(2))
   })
+
+  it("should give a proper id even with odd tasks in the list.", () => {
+    const setTask = getMockStateSetter([{ id: 3 }, { id: 1 }])
+    const title = 'title'
+    createTask(setTask, `${title}1`)
+    createTask(setTask, `${title}2`)
+    setTask(tasks => expect(tasks[3].id).toBe(5))
+  })
 })

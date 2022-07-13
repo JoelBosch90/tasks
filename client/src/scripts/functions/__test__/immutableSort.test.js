@@ -2,16 +2,22 @@
 import immutableSort from '../immutableSort';
 
 describe("The immutable sort function", () => {
+  it("should be a function.", () => {
+    expect(immutableSort).toBeInstanceOf(Function)
+  })
+
   it("should return a sorted list.", () => {
     const array = ['b', 'c', 'a', 'e', 'd', 'y']
     const sorted = immutableSort(array)
     expect(sorted).toEqual(['a', 'b', 'c', 'd', 'e', 'y'])
   })
+
   it("should not mutate the original list.", () => {
     const array = ['b', 'c', 'a', 'e', 'd', 'y']
     immutableSort(array)
     expect(array).toEqual(['b', 'c', 'a', 'e', 'd', 'y'])
   })
+  
   it("should also sort with a custom sorting function.", () => {
     /**
      *  Function to sort object by their title property.

@@ -2,7 +2,7 @@
 import getMockStateSetter from '../getMockStateSetter'
 
 describe("The mock state setter function", () => {
-  it("should return a function.", () => {
+  it("should be a function.", () => {
     expect(getMockStateSetter).toBeInstanceOf(Function)
   })
 
@@ -18,8 +18,20 @@ describe("The mock state setter function", () => {
     setter(state => expect(state).toEqual(defaultValue))
   })
 
-  it("should initially take a default Object value.", () => {
+  it("should initially take a default filled array value.", () => {
+    const defaultValue = [1, 2, 3, 4, '5']
+    const setter = getMockStateSetter(defaultValue)
+    setter(state => expect(state).toEqual(defaultValue))
+  })
+
+  it("should initially take a default object value.", () => {
     const defaultValue = {}
+    const setter = getMockStateSetter(defaultValue)
+    setter(state => expect(state).toEqual(defaultValue))
+  })
+
+  it("should initially take a default filled object value.", () => {
+    const defaultValue = { a: 1, b: 2, c: 3, d: 4, e: '5' }
     const setter = getMockStateSetter(defaultValue)
     setter(state => expect(state).toEqual(defaultValue))
   })

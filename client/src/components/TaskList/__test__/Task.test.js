@@ -73,6 +73,7 @@ describe("The Task component", () => {
     // Test that the title is displayed.
     expect(screen.queryByText(title)).not.toBeNull()
   })
+  
   it("should be able to be marked and unmarked.", () => {
 
     // Generate a random seed to make sure that every test tests different
@@ -118,6 +119,7 @@ describe("The Task component", () => {
     // Test that the task is no longer marked as completed.
     expect(JSON.parse(window.localStorage.getItem(id)).done).toEqual(false)
   })
+
   it("should be able to be removed.", () => {
 
     // Generate a random seed to make sure that every test tests different
@@ -148,7 +150,8 @@ describe("The Task component", () => {
     // Test that the task is now marked as removed.
     expect(JSON.parse(window.localStorage.getItem(id)).removed).toEqual(true)
   })
-  it("should be able to be update the title.", () => {
+
+  it("should be able to be update the title using the save button.", () => {
 
     // Generate a random seed to make sure that every test tests different
     // values.
@@ -203,6 +206,63 @@ describe("The Task component", () => {
 
     // Simulate a click on the save button.
     userEvent.click(saveButton)
+
+    // Test that the new title is displayed.
+    expect(screen.queryByText(newTitle)).not.toBeNull()
+
+    // Test that the initial title is no longer displayed.
+    expect(screen.queryByText(title)).toBeNull()
+
+    // Test that the task is now updated.
+    expect(JSON.parse(window.localStorage.getItem(id)).title).toEqual(newTitle)
+  })
+
+  it("should be able to be update the title using the enter key.", () => {
+
+    // Generate a random seed to make sure that every test tests different
+    // values.
+    const seed = Math.random().toString()
+
+    // We need a title and an id for the test component.
+    const title = `${seed}title`
+    const id = Math.round(seed * 1000)
+
+    // Render the test component.
+    render(
+      <TestComponent
+        title={title}
+        id={id}
+      />
+    )
+
+    // Find the edit button.
+    const editButton = screen.getByRole('button', { name: 'Edit' })
+
+    // Make sure that the edit button is there.
+    expect(editButton).toBeInTheDocument()
+
+    // Test that the initial title is displayed.
+    expect(screen.queryByText(title)).not.toBeNull()
+
+    // Simulate a click on the edit button.
+    userEvent.click(editButton)
+
+    // Find the edit input.
+    const editInput = screen.getByRole('textbox', { name: 'Edit title' })
+
+    // Make sure that the input is there and that it is visible.
+    expect(editInput).toBeInTheDocument()
+    expect(editInput).toBeVisible()
+
+    // Test that the initial title is displayed.
+    expect(editInput).toHaveValue(title)
+
+    // Create a new title.
+    const newTitle = `${seed}newTitle`
+
+    // Enter the new title in the edit field and press the enter key.
+    userEvent.clear(editInput)
+    userEvent.type(editInput, `${newTitle}{enter}`)
 
     // Test that the new title is displayed.
     expect(screen.queryByText(newTitle)).not.toBeNull()
