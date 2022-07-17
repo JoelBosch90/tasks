@@ -30,6 +30,7 @@ const TestComponent = ({ id, title }) => {
    */
   const updateTask =  (update) => {
     setTask(state => {
+
       // Create the new state based on the old state.
       const updated = { ...state, ...update, id: state.id }
 
@@ -56,7 +57,7 @@ describe("The Task component", () => {
 
     // Generate a random seed to make sure that every test tests different
     // values.
-    const seed = Math.random().toString()
+    const seed = Math.random()
 
     // We need a title and an id for the test component.
     const title = `${seed}title`
@@ -78,7 +79,7 @@ describe("The Task component", () => {
 
     // Generate a random seed to make sure that every test tests different
     // values.
-    const seed = Math.random().toString()
+    const seed = Math.random()
 
     // We need a title and an id for the test component.
     const title = `${seed}title`
@@ -124,7 +125,7 @@ describe("The Task component", () => {
 
     // Generate a random seed to make sure that every test tests different
     // values.
-    const seed = Math.random().toString()
+    const seed = Math.random()
 
     // We need a title and an id for the test component.
     const title = `${seed}title`
@@ -155,7 +156,7 @@ describe("The Task component", () => {
 
     // Generate a random seed to make sure that every test tests different
     // values.
-    const seed = Math.random().toString()
+    const seed = Math.random()
 
     // We need a title and an id for the test component.
     const title = `${seed}title`
@@ -221,7 +222,7 @@ describe("The Task component", () => {
 
     // Generate a random seed to make sure that every test tests different
     // values.
-    const seed = Math.random().toString()
+    const seed = Math.random()
 
     // We need a title and an id for the test component.
     const title = `${seed}title`

@@ -48,12 +48,14 @@ export default function NewTask({ createTask }) {
         ref={inputRef}
         type="text"
         placeholder={"New task title..."}
+        aria-label={"New task title"}
         onChange={inputChangeHandler}
         onKeyDown={event => { if (event.key === 'Enter') addTask() }}
       />
       <button
         onClick={addTask}
         className={'icon'}
+        aria-label={'Create new task'}
       >
         <FontAwesomeIcon icon={faPlus} />
       </button>

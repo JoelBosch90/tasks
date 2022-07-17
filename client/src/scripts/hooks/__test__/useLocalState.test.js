@@ -43,7 +43,7 @@ describe("The use local state hook", () => {
 
     // Use random values for the name and value so that we can be sure that
     // they're set by this test case and not by another.
-    const randomValue = Math.random().toString()
+    const randomValue = Math.random()
     const [name, defaultValue] = [`${randomValue}name`, `${randomValue}value`]
 
     // Render the component with the generated values.
@@ -60,7 +60,7 @@ describe("The use local state hook", () => {
 
     // Use random values for the name and value so that we can be sure that
     // they're set by this test case and not by another.
-    const randomValue = Math.random().toString()
+    const randomValue = Math.random()
     const [name, defaultValue] = [`${randomValue}name`, `${randomValue}default`, `${randomValue}value`]
 
     // Render the component with the generated values.
@@ -78,7 +78,7 @@ describe("The use local state hook", () => {
 
     // Use random values for the name and value so that we can be sure that
     // they're set by this test case and not by another.
-    const randomValue = Math.random().toString()
+    const randomValue = Math.random()
     const [name, defaultValue, newValue] = [`${randomValue}name`, `${randomValue}default`, `${randomValue}value`]
 
     // Render the component with the generated values.
@@ -96,7 +96,7 @@ describe("The use local state hook", () => {
 
     // Use random values for the name and value so that we can be sure that
     // they're set by this test case and not by another.
-    const randomValue = Math.random().toString()
+    const randomValue = Math.random()
     const [name, defaultValue, newValue] = [`${randomValue}name`, `${randomValue}default`, `${randomValue}value`]
 
     /**
@@ -134,7 +134,7 @@ describe("The use local state hook", () => {
 
     // Use random values for the name and value so that we can be sure that
     // they're set by this test case and not by another.
-    const randomValue = Math.random().toString()
+    const randomValue = Math.random()
     const [name, defaultValue, newValue] = [`${randomValue}name`, `${randomValue}default`, `${randomValue}value`]
 
     // Set the new value in localStorage.
