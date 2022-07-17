@@ -3,6 +3,6 @@
  *  @param    {any}   json  The potential JSON object.
  *  @returns  {any}
  */
-const safeParse = json => json === 'undefined' ? undefined : JSON.parse(json)
-
-export default safeParse
+export default function(json) {
+  return json === 'undefined' ? undefined : JSON.parse(json)
+}

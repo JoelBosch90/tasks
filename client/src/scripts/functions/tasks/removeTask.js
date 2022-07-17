@@ -4,10 +4,8 @@
  *                              the task.
  *  @param  {Number}  id        The id of the task to remove.
  */
-const updateTask = (setTasks, id) => {
+export default function(setTasks, id) {
   setTasks(tasks => {
     return tasks.filter(task => task.id !== id)
   })
 }
-
-export default updateTask

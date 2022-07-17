@@ -6,7 +6,7 @@ import safeParse from './safeParse'
  *  @param    {string}  name
  *  @returns  {any}
  */
-const getLocalProp = (name) => {
+export default function(name) {
 
   // Try to get the prop from the local storage.
   if (window.localStorage.getItem(name) !== null) return safeParse(window.localStorage.getItem(name))
@@ -14,5 +14,3 @@ const getLocalProp = (name) => {
   // Default to undefined.
   return undefined
 }
-
-export default getLocalProp

@@ -18,7 +18,7 @@
  *    })
  *    ```
  */
-class mockLocalStorage {
+export default class {
 
   // We can use a Map to store the data. This lets us set key/value combinations
   // and also keeps a reliable order. We store this as a private property.
@@ -125,5 +125,3 @@ class mockLocalStorage {
     return this.#map.has(prop)
   }
 }
-
-export default mockLocalStorage

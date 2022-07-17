@@ -6,6 +6,11 @@ describe("The mock state setter function", () => {
     expect(getMockStateSetter).toBeInstanceOf(Function)
   })
 
+  it("should set an empty string if not passed a default value.", () => {
+    const setter = getMockStateSetter()
+    setter(state => expect(state).toEqual(''))
+  })
+
   it("should initially take a default string value.", () => {
     const defaultValue = 'DefaultValue'
     const setter = getMockStateSetter(defaultValue)

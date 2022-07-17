@@ -8,10 +8,8 @@
  *    @property {Boolean}   done  Whether the task is done or not.
  *  @return {Number}
  */
-const sortByCompleted = (taskA, taskB) => {
+export default function(taskA, taskB) {
   if (taskA.done && !taskB.done) return -1
   if (!taskA.done && taskB.done) return 1
   return 0
 }
-
-export default sortByCompleted

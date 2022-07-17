@@ -7,7 +7,7 @@
  *                              properties that are not included will not be
  *                              changed)
  */
-const updateTask = (setTasks, id, update) => {
+export default function (setTasks, id, update) {
   setTasks(tasks => {
     return tasks.map(task => {
 
@@ -19,5 +19,3 @@ const updateTask = (setTasks, id, update) => {
     })
   })
 }
-
-export default updateTask

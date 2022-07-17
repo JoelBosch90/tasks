@@ -3,6 +3,6 @@
  *  @param    {string}  name
  *  @param    {any}     value
  */
-const setLocalProp = (name, value) => void window.localStorage.setItem(name, JSON.stringify(value)) 
-
-export default setLocalProp
+export default function(name, value) {
+  window.localStorage.setItem(name, JSON.stringify(value)) 
+}

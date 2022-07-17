@@ -4,7 +4,7 @@
  *                              the task.
  *  @param  {String}  title     The title for the new task.
  */
-const createTask = (setTasks, title) => {
+export default function (setTasks, title) {
   setTasks(tasks => {
 
     // Find the largest task id we currently have.
@@ -18,5 +18,3 @@ const createTask = (setTasks, title) => {
     }]
   })
 }
-
-export default createTask
