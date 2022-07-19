@@ -241,12 +241,16 @@ describe("The NewTask component", () => {
     // Make sure that the input is there.
     expect(input).toBeInTheDocument()
 
-    // Add all the tasks.
-    for(const title of titles) userEvent.type(input, `${title}{enter}`)
+    // Loop through all task titles.
+    for(const title of titles) {
+      
+      // Add a task for each title.
+      userEvent.type(input, `${title}{enter}`)
 
-    // Check that they're all displayed.
-    for(const title of titles) expect(screen.queryByDisplayValue(title)).not.toBeNull()
-
+      // Check that the task is displayed.
+      expect(screen.queryByDisplayValue(title)).not.toBeNull()
+    }
+    
     // Get the checkboxes for all tasks.
     const checkboxes = screen.getAllByRole('checkbox', { name: 'Task completed' })
 
