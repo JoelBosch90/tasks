@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IMAGE_NAME: "${secrets.DOCKERHUB_USERNAME}/tasks/test"
+      IMAGE_NAME: echo "${secrets.DOCKERHUB_USERNAME}/tasks/test"
 
     steps:
     - name: "Helper log 1"
