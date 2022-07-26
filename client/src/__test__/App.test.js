@@ -35,7 +35,7 @@ describe("The NewTask component", () => {
     userEvent.type(input, `${newTaskName}{enter}`)
 
     // Check that this task is now displayed.
-    expect(screen.queryByText(newTaskName + 1)).not.toBeNull()
+    expect(screen.queryByText(newTaskName)).not.toBeNull()
   })
   
   it("should store a new task in localStorage.", () => {
