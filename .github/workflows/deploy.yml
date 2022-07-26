@@ -17,81 +17,54 @@ on:
     branches:
     - production
 
-# Here we define what jobs this action must perform.
 jobs:
 
-  # test:
-  #   name: Test client
-
-  #   runs-on: ubuntu-latest
-  #   container: node:17-alpine
-
-  #   steps:
-  #   - name: "Checkout repository"
-  #     uses: actions/checkout@v3
-
-  #   - name: "Install package manager"
-  #     run: npm i -g npm@latest
-
-  #   - name: "Install client dependencies"
-  #     uses: bahmutov/npm-install@v1
-  #     with:
-  #       working-directory: client
-
-  #   - name: "Run client tests"
-  #     run: npm test
-  #     working-directory: client
-
-  build:
-    name: Build and deploy the application.
-    # needs: test
+  test:
+    name: Test client
 
     runs-on: ubuntu-latest
+    container: node:17-alpine
 
     steps:
-    - name: "Set env"
-      run: echo "IMAGE_NAME=$(echo "helloworld/tasks:test")" >> $GITHUB_ENV
-
-    - name: "Read env"
-      run: echo ${{ env.IMAGE_NAME }}
-
-    - name: "Login to Docker Hub"
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-
     - name: "Checkout repository"
       uses: actions/checkout@v3
 
-    - name: "Build image"
-      run: docker-compose up -t ${{ env.IMAGE_NAME }}
+    - name: "Install package manager"
+      run: npm i -g npm@latest
 
-    - name: "Push image to Docker Hub"
-      run: docker push ${{ env.IMAGE_NAME }}
+    - name: "Install client dependencies"
+      uses: bahmutov/npm-install@v1
+      with:
+        working-directory: client
 
-    # # First, we need to make sure that the virtual private server is updated to
-    # # the latest version of the repository.
-    # - name: Copy repository contents through SCP
-    #   uses: appleboy/scp-action@master
-    #   env:
-    #     HOST: ${{ secrets.HOST }}
-    #     USERNAME: ${{ secrets.USER }}
-    #     PORT: ${{ secrets.PORT }}
-    #     KEY: ${{ secrets.KEY }}
-    #   with:
-    #     source: "."
-    #     target: "/var/www/tasks"
+    - name: "Run client tests"
+      run: npm test
+      working-directory: client
 
-    # # Next, we need to execute some actions. We need to navigate to the right
-    # # directory for our repository and rebuild the Docker Compose network.
-    # - name: Execute remote command through SSH
-    #   uses: appleboy/ssh-action@master
-    #   with:
-    #     HOST: ${{ secrets.HOST }}
-    #     USERNAME: ${{ secrets.USER }}
-    #     PORT: ${{ secrets.PORT }}
-    #     KEY: ${{ secrets.KEY }}
-    #     script: |
-    #       cd /var/www/tasks
-    #       docker-compose up -d --build
+  build:
+    name: Build and deploy the application.
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Copy repository to VPS
+      uses: appleboy/scp-action@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USER }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.KEY }}
+      with:
+        source: "."
+        target: "/var/www/tasks"
+
+    - name: Build and run new images on VPS
+      uses: appleboy/ssh-action@master
+      with:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USER }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.KEY }}
+        script: |
+          cd /var/www/tasks
+          docker-compose up -d --build
