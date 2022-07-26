@@ -52,6 +52,10 @@ jobs:
     needs: test-client
 
     steps:
+    
+    - name: "Checkout repository"
+      uses: actions/checkout@v3
+
     - name: Copy repository to VPS
       uses: appleboy/scp-action@master
       env:
