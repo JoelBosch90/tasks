@@ -26,62 +26,57 @@ jobs:
     runs-on: ubuntu-latest
     container: node:17-alpine
     steps:
-      - name: "Checkout the repository."
+      - name: "Checkout repository"
         uses: actions/checkout@v2
 
-      - name: "Install the package manager."
+      - name: "Install package manager"
         run: npm i -g npm@latest
 
-      - name: "Install the client dependencies."
+      - name: "Install client dependencies"
         uses: bahmutov/npm-install@v1
+        env:
+          NODE_ENV: production
         with:
           working-directory: client
 
-      - name: "Run all tests."
+      - name: "Run all tests"
         run: npm t
         working-directory: client
 
   # We want this action to release the latest changes to the virtual private
   # server that runs our code.
-  # deploy:
+  deploy:
+    name: Build and deploy the application.
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
 
-  #   # Release the 
-  #   name: Build and deploy the application.
+    # This command checks out our repository so that we can access the latest
+    # files.
+    - uses: actions/checkout@v2
 
-  #   # Here we determine which OS GitHub Actions should use. For convenience, we
-  #   # run these commands on Ubuntu.
-  #   runs-on: ubuntu-latest
+    # First, we need to make sure that the virtual private server is updated to
+    # the latest version of the repository.
+    - name: Copy repository contents through SCP
+      uses: appleboy/scp-action@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USER }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.KEY }}
+      with:
+        source: "."
+        target: "/var/www/tasks"
 
-  #   # Here we can iterate the steps that we need to take to release the latest
-  #   # changes.
-  #   steps:
-
-  #   # This command checks out our repository so that we can access the latest
-  #   # files.
-  #   - uses: actions/checkout@v2
-
-  #   # First, we need to make sure that the virtual private server is updated to
-  #   # the latest version of the repository.
-  #   - name: Copy repository contents through SCP
-  #     uses: appleboy/scp-action@master
-  #     env:
-  #       HOST: ${{ secrets.HOST }}
-  #       USERNAME: ${{ secrets.USER }}
-  #       PORT: ${{ secrets.PORT }}
-  #       KEY: ${{ secrets.KEY }}
-  #     with:
-  #       source: "."
-  #       target: "/var/www/tasks"
-
-  #   # Next, we need to execute some actions. We need to navigate to the right
-  #   # directory for our repository and rebuild the Docker Compose network.
-  #   - name: Execute remote command through SSH
-  #     uses: appleboy/ssh-action@master
-  #     with:
-  #       HOST: ${{ secrets.HOST }}
-  #       USERNAME: ${{ secrets.USER }}
-  #       PORT: ${{ secrets.PORT }}
-  #       KEY: ${{ secrets.KEY }}
-  #       script: |
-  #         cd /var/www/tasks
-  #         docker-compose up -d --build
+    # Next, we need to execute some actions. We need to navigate to the right
+    # directory for our repository and rebuild the Docker Compose network.
+    - name: Execute remote command through SSH
+      uses: appleboy/ssh-action@master
+      with:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USER }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.KEY }}
+        script: |
+          cd /var/www/tasks
+          docker-compose up -d --build
