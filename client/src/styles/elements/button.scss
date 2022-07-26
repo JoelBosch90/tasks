@@ -23,9 +23,9 @@ button
   // Give the buttons rounded corners for a friendlier look.
   border-radius: .25em;
 
-  // Use a darker background color and lighter text.
-  color: hsl(0, 0%, 85%, 0.95);
-  background-color: hsl(0, 0%, 30%, 0.95);
+  // Use a lighter background color and darker text.
+  color: hsl(0, 0%, 35%);
+  background-color: hsl(0, 0%, 75%, 0.25);
 
   // Make sure that it is clear that this is clickable.
   cursor: pointer;
@@ -43,6 +43,5 @@ button
     // Center the icons.
     display: flex;
     align-items: center;
-    justify-items: center;
   }
 }
