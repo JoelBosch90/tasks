@@ -20,61 +20,72 @@ on:
 # Here we define what jobs this action must perform.
 jobs:
 
-  # Run the GitHub Action for testing the application that's define elsewhere.
   test:
     name: Test client
+
     runs-on: ubuntu-latest
     container: node:17-alpine
+
     steps:
-      - name: "Checkout repository"
-        uses: actions/checkout@v2
+    - name: "Checkout repository"
+      uses: actions/checkout@v3
 
-      - name: "Install package manager"
-        run: npm i -g npm@latest
+    - name: "Install package manager"
+      run: npm i -g npm@latest
 
-      - name: "Install client dependencies"
-        uses: bahmutov/npm-install@v1
-        with:
-          working-directory: client
-
-      - name: "Run client tests"
-        run: npm test
+    - name: "Install client dependencies"
+      uses: bahmutov/npm-install@v1
+      with:
         working-directory: client
 
-  # We want this action to release the latest changes to the virtual private
-  # server that runs our code.
-  deploy:
+    - name: "Run client tests"
+      run: npm test
+      working-directory: client
+
+  build:
     name: Build and deploy the application.
     needs: test
+
     runs-on: ubuntu-latest
+
     steps:
-
-    # This command checks out our repository so that we can access the latest
-    # files.
-    - uses: actions/checkout@v2
-
-    # First, we need to make sure that the virtual private server is updated to
-    # the latest version of the repository.
-    - name: Copy repository contents through SCP
-      uses: appleboy/scp-action@master
-      env:
-        HOST: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USER }}
-        PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.KEY }}
+    - name: "Login to Docker Hub"
+      uses: docker/login-action@v2
       with:
-        source: "."
-        target: "/var/www/tasks"
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    # Next, we need to execute some actions. We need to navigate to the right
-    # directory for our repository and rebuild the Docker Compose network.
-    - name: Execute remote command through SSH
-      uses: appleboy/ssh-action@master
-      with:
-        HOST: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USER }}
-        PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.KEY }}
-        script: |
-          cd /var/www/tasks
-          docker-compose up -d --build
+    - name: "Checkout repository"
+      uses: actions/checkout@v3
+
+    - name: "Build image"
+      run: docker-compose up -t ${{ secrets.DOCKERHUB_USERNAME }}/tasks:test
+    
+    - name: "Push image to Docker Hub"
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/tasks:test
+
+    # # First, we need to make sure that the virtual private server is updated to
+    # # the latest version of the repository.
+    # - name: Copy repository contents through SCP
+    #   uses: appleboy/scp-action@master
+    #   env:
+    #     HOST: ${{ secrets.HOST }}
+    #     USERNAME: ${{ secrets.USER }}
+    #     PORT: ${{ secrets.PORT }}
+    #     KEY: ${{ secrets.KEY }}
+    #   with:
+    #     source: "."
+    #     target: "/var/www/tasks"
+
+    # # Next, we need to execute some actions. We need to navigate to the right
+    # # directory for our repository and rebuild the Docker Compose network.
+    # - name: Execute remote command through SSH
+    #   uses: appleboy/ssh-action@master
+    #   with:
+    #     HOST: ${{ secrets.HOST }}
+    #     USERNAME: ${{ secrets.USER }}
+    #     PORT: ${{ secrets.PORT }}
+    #     KEY: ${{ secrets.KEY }}
+    #     script: |
+    #       cd /var/www/tasks
+    #       docker-compose up -d --build
