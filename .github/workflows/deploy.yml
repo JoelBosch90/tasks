@@ -22,12 +22,35 @@ jobs:
 
   # Run the GitHub Action for testing the application that's define elsewhere.
   test:
-    name: Test
-    uses: tasks/.github/workflows/test.yml@main
+    name: Test client
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout the repository."
+        uses: actions/checkout@v2
+
+      - name: "Visit the client directory."
+        run: cd client
+
+      - name: "Setup Node."
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 17-alpine
+
+      - name: "Install the package manager."
+        run: npm i -g npm@latest
+
+      - name: "Install the client dependencies."
+        uses: bahmutov/npm-install@v1
+
+      - name: "Run all tests."
+        run: npm t
 
   # We want this action to release the latest changes to the virtual private
   # server that runs our code.
-  release:
+  deploy:
+
+    # Release the 
+    name: Build and deploy the application.
 
     # Here we determine which OS GitHub Actions should use. For convenience, we
     # run these commands on Ubuntu.
