@@ -34,13 +34,11 @@ jobs:
 
       - name: "Install client dependencies"
         uses: bahmutov/npm-install@v1
-        env:
-          NODE_ENV: production
         with:
           working-directory: client
 
-      - name: "Run all tests"
-        run: npm t
+      - name: "Run client tests"
+        run: npm test
         working-directory: client
 
   # We want this action to release the latest changes to the virtual private
