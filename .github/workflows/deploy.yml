@@ -63,13 +63,13 @@ jobs:
       run: echo ::set-output name=image::$(echo "${{ secrets.DOCKERHUB_USERNAME }}/tasks/test")
 
     - name: "Helper log 1"
-      run: echo "${steps.variables}"
+      run: echo $(steps.variables)
 
     - name: "Helper log 2"
-      run: echo "${steps.variables.outputs}"
+      run: echo $(steps.variables.outputs)
 
     - name: "Helper log 3"
-      run: echo "${steps.variables.outputs.image}"
+      run: echo $(steps.variables.outputs.image)
 
     - name: "Build image"
       run: docker-compose up -t $(steps.variables.outputs.image)
