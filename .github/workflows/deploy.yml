@@ -39,8 +39,7 @@ jobs:
 
       - name: "Run all tests."
         run: npm t
-        with:
-          working-directory: client
+        working-directory: client
 
   # We want this action to release the latest changes to the virtual private
   # server that runs our code.
