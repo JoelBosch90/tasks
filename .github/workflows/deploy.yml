@@ -60,7 +60,7 @@ jobs:
 
     - name: "Construct image name"
       id: variables
-      run: echo ::set-output name=image::$(echo "$(secrets.DOCKERHUB_USERNAME)/tasks/test")
+      run: echo ::set-output name=image::$(echo "${{ secrets.DOCKERHUB_USERNAME }}/tasks/test")
 
     - name: "Build image"
       run: docker-compose up -t $(steps.variables.outputs.image)
