@@ -50,7 +50,7 @@ jobs:
 
     steps:
     - name: "Set env"
-      run: echo "IMAGE_NAME=$(echo "joelbosch/tasks/test")" >> $GITHUB_ENV
+      run: echo "IMAGE_NAME=$(echo "${{ secrets.DOCKERHUB_USERNAME }}/tasks:test")" >> $GITHUB_ENV
 
     - name: "Read env"
       run: echo ${{ env.IMAGE_NAME }}
