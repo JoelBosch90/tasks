@@ -53,7 +53,7 @@ jobs:
 
     steps:
     - name: "Helper log 1"
-      run: bash -c 'echo "${env.IMAGE_NAME}"'
+      run: echo "$env.IMAGE_NAME"
 
     - name: "Login to Docker Hub"
       uses: docker/login-action@v2
