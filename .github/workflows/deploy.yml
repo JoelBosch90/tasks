@@ -25,12 +25,12 @@ jobs:
     name: Test client
     runs-on: ubuntu-latest
     container: node:17-alpine
+    defaults:
+      run:
+        working-directory: ./client
     steps:
       - name: "Checkout the repository."
         uses: actions/checkout@v2
-
-      - name: "Visit the client directory."
-        run: cd client
 
       - name: "Install the package manager."
         run: npm i -g npm@latest
