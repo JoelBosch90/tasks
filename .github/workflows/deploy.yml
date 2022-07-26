@@ -48,7 +48,13 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      IMAGE_NAME: "${secrets.DOCKERHUB_USERNAME}/tasks/test"
+
     steps:
+    - name: "Helper log 1"
+      run: echo $(IMAGE_NAME)
+
     - name: "Login to Docker Hub"
       uses: docker/login-action@v2
       with:
@@ -58,18 +64,11 @@ jobs:
     - name: "Checkout repository"
       uses: actions/checkout@v3
 
-    - name: "Construct image name"
-      id: variables
-      run: echo ::set-output name=image::$(echo "${{ secrets.DOCKERHUB_USERNAME }}/tasks/test")
-
-    - name: "Helper log 1"
-      run: echo "$(steps.variables)"
-
     - name: "Build image"
-      run: docker-compose up -t $(steps.variables.outputs.image)
+      run: docker-compose up -t ${{ env.IMAGE_NAME }}
     
     - name: "Push image to Docker Hub"
-      run: docker push $(steps.variables.outputs.image)
+      run: docker push ${{ env.IMAGE_NAME }}
 
     # # First, we need to make sure that the virtual private server is updated to
     # # the latest version of the repository.
