@@ -63,10 +63,10 @@ jobs:
       run: echo ::set-output name=image::$(echo "${secrets.DOCKERHUB_USERNAME}/tasks/test")
 
     - name: "Build image"
-      run: docker-compose up -t "$steps.variables.outputs.image"
+      run: docker-compose up -t ${steps.variables.outputs.image}
     
     - name: "Push image to Docker Hub"
-      run: docker push "$steps.variables.outputs.image"
+      run: docker push ${steps.variables.outputs.image}
 
     # # First, we need to make sure that the virtual private server is updated to
     # # the latest version of the repository.
