@@ -20,31 +20,31 @@ on:
 # Here we define what jobs this action must perform.
 jobs:
 
-  test:
-    name: Test client
+  # test:
+  #   name: Test client
 
-    runs-on: ubuntu-latest
-    container: node:17-alpine
+  #   runs-on: ubuntu-latest
+  #   container: node:17-alpine
 
-    steps:
-    - name: "Checkout repository"
-      uses: actions/checkout@v3
+  #   steps:
+  #   - name: "Checkout repository"
+  #     uses: actions/checkout@v3
 
-    - name: "Install package manager"
-      run: npm i -g npm@latest
+  #   - name: "Install package manager"
+  #     run: npm i -g npm@latest
 
-    - name: "Install client dependencies"
-      uses: bahmutov/npm-install@v1
-      with:
-        working-directory: client
+  #   - name: "Install client dependencies"
+  #     uses: bahmutov/npm-install@v1
+  #     with:
+  #       working-directory: client
 
-    - name: "Run client tests"
-      run: npm test
-      working-directory: client
+  #   - name: "Run client tests"
+  #     run: npm test
+  #     working-directory: client
 
   build:
     name: Build and deploy the application.
-    needs: test
+    # needs: test
 
     runs-on: ubuntu-latest
 
@@ -58,11 +58,15 @@ jobs:
     - name: "Checkout repository"
       uses: actions/checkout@v3
 
+    - name: "Construct image name"
+      id: variables
+      run: echo ::set-output name=image::$(echo "${secrets.DOCKERHUB_USERNAME}/tasks/test")
+
     - name: "Build image"
-      run: docker-compose up -t $secrets.DOCKERHUB_USERNAME/tasks:test
+      run: docker-compose up -t "$steps.variables.outputs.image"
     
     - name: "Push image to Docker Hub"
-      run: docker push $secrets.DOCKERHUB_USERNAME/tasks:test
+      run: docker push "$steps.variables.outputs.image"
 
     # # First, we need to make sure that the virtual private server is updated to
     # # the latest version of the repository.
