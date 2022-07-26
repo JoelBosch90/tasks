@@ -20,6 +20,11 @@ on:
 # Here we define what jobs this action must perform.
 jobs:
 
+  # Run the GitHub Action for testing the application that's define elsewhere.
+  test:
+    name: Test
+    uses: tasks/tasks/.github/workflows/test.yml@main
+
   # We want this action to release the latest changes to the virtual private
   # server that runs our code.
   release:

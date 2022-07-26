@@ -1,8 +1,8 @@
 # Tasks
-This is a basic task list written in React. Currently, it only stores the tasks
-in JavaScript memory, so you'll lose still your tasks on every page refresh.
+This is a basic task list written in React. Currently, tasks are stored in local
+storage, so you'll lose all tasks if you reset it.
 
-# Demo
+## Demo
 You can view a live version of this app [here](https://tasks.joelbosch.nl/).
 
 # How to run

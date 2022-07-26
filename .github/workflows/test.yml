@@ -1,0 +1,38 @@
+##############################################################################
+#
+# Test
+#   This is the GitHub Action configuration file for running tests.
+#
+##############################################################################
+
+# Name this GitHub Action.
+name: Test
+
+# Here we define what jobs this action must perform.
+jobs:
+
+  # We want this action to release the latest changes to the virtual private
+  # server that runs our code.
+  client:
+    name: Test client
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout the repository."
+        uses: actions/checkout@v2
+
+      - name: "Visit the client directory."
+        script: cd /var/www/tasks
+
+      - name: "Setup Node."
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 17-alpine
+
+      - name: "Install the package manager."
+        run: npm i -g npm@latest
+
+      - name: "Install the client dependencies."
+        uses: bahmutov/npm-install@v1
+
+      - name: "Run all tests."
+        run: npm t
