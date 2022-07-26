@@ -19,9 +19,11 @@ on:
 
 jobs:
 
-  test:
+  # Run tests for the client service.
+  test-client:
     name: Test client
 
+    # Use the same environment we use in the client service's docker container.
     runs-on: ubuntu-latest
     container: node:17-alpine
 
@@ -41,10 +43,13 @@ jobs:
       run: npm test
       working-directory: client
 
-  build:
+  # Deploy the application to the virtual private server.
+  deploy:
     name: Build and deploy the application.
-    needs: test
     runs-on: ubuntu-latest
+
+    # Only run this job if the test jobs were run successfully.
+    needs: test-client
 
     steps:
     - name: Copy repository to VPS
