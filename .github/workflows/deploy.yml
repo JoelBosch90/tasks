@@ -25,9 +25,6 @@ jobs:
     name: Test client
     runs-on: ubuntu-latest
     container: node:17-alpine
-    defaults:
-      run:
-        working-directory: ./client
     steps:
       - name: "Checkout the repository."
         uses: actions/checkout@v2
@@ -37,9 +34,13 @@ jobs:
 
       - name: "Install the client dependencies."
         uses: bahmutov/npm-install@v1
+        with:
+          working-directory: client
 
       - name: "Run all tests."
         run: npm t
+        with:
+          working-directory: client
 
   # We want this action to release the latest changes to the virtual private
   # server that runs our code.
